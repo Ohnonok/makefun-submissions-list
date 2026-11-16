@@ -1,0 +1,18 @@
+[package]
+name = "forge"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+flate2 = "1"
+sha1 = "0.10"
+serde_json = { version = "1", features = ["preserve_order"] }
+libc = "0.2"
+indexmap = "2"
+
+[profile.release]
+opt-level = "z"
+lto = true
+codegen-units = 1
+panic = "unwind"
+strip = true
