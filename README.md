@@ -42,6 +42,7 @@ date and may have moved since.
 | github-core-clone-01 | v1 | 01a1deb8-5125-717e-af15-ac7de31371a0 | 7d730be | 2026-11-15 | TypeScript entry; superseded by rust round 3 (Force_Last) |
 | github-core-clone-01 | v2 | 01a1df06-702d-772f-87b3-7ec43f40be7f | 7ebc300 | 2026-11-15 | v3.2, scored 914; superseded by rust round 3 (Force_Last) |
 | markdown-render-speed-02 | v1 | 01a1e3b2-5c5b-7732-8831-0a9d65aa34a8 | 553f546 | 2026-11-16 | Round 1; later FAILED server validation (authorship 4.56% vs 30% required); round 2 in progress |
+| markdown-render-speed-02 | r2 | 01a1e5d5-1db7-73ac-8514-f581bfe8463b | c3c6693 | 2026-11-17 | Round 2; submitted as-is (user order); practice 693/720, 0.700x vs target <0.35x; grading queued |
 | news-image-01 | v1 | 01a1dacb-778d-71f9-a678-0c4eebc89d44 | e26cb69 | 2026-11-14 | Accepted (HTTP 202); superseded by v3 (Force_Last) |
 | news-image-01 | v3 | 01a1daf6-47b5-778b-8467-1dc356bcde49 | ecc67d5 | 2026-11-14 | 33 stories, 6 continents, one front page; accepted (HTTP 202) |
 | news-summary-01 | round-3 | 01a1cdba-2ab7-74b5-bb4f-c6a9be105a20 | ba9a3be | 2026-11-12 | Rank #50, 96.44%; superseded by round 4 |
