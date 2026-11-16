@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta nm="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>SOLARIS-9: ASTRAL BREACH</title>
+<style>
+:root{--gold:#f4a261;--ivory:#ede8dc;--panel:rgba(13,27,46,.82);--violet:#7b2fbe;--cyan:#48cae4}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;overflow:hidden;background:#0d1b2e;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ivory)}
+canvas{display:block}
+#hd{position:fixed;inset:0;pointer-events:none;z-index:5}
+.panel{background:var(--panel);border:1px solid rgba(244,162,97,.45);border-radius:6px}
+#minimap{position:absolute;top:12px;left:12px;width:160px;height:120px;border:2px solid var(--gold);border-radius:4px;background:rgba(13,27,46,.7)}
+#round-label{position:absolute;top:12px;left:50%;transform:translateX(-50%);padding:4px 14px;font-weight:700;letter-spacing:2px;color:var(--gold);font-size:14px}
+#score{position:absolute;top:44px;left:50%;transform:translateX(-50%);padding:4px 14px;font-weight:700;font-size:15px}
+#timer{position:absolute;top:78px;left:50%;transform:translateX(-50%);padding:2px 12px;font-weight:700;font-size:18px;color:var(--gold)}
+#alive{position:absolute;top:140px;left:12px;padding:3px 10px;font-weight:700;font-size:13px}
+#crosshair{position:absolute;left:50%;top:50%;width:0;height:0}
+#crosshair span{position:absolute;background:var(--gold);box-shadow:0 0 3px #000}
+#crosshair .ch-t{left:-1px;top:-14px;width:2px;height:8px}
+#crosshair .ch-r{left:6px;top:-1px;width:8px;height:2px}
+#crosshair .ch-b{left:-1px;top:6px;width:2px;height:8px}
+#crosshair .ch-l{left:-14px;top:-1px;width:8px;height:2px}
+#hitmarker{position:absolute;left:50%;top:50%;width:22px;height:22px;margin:-11px 0 0 -11px;opacity:0}
+#hitmarker::before,#hitmarker::after{content:"";position:absolute;left:10px;top:0;width:2px;height:22px;background:#fff}
+#hitmarker::before{transform:rotate(45deg)}
+#hitmarker::after{transform:rotate(-45deg)}
+#headshot-popup{position:absolute;left:50%;top:34%;transform:translateX(-50%);font-size:26px;font-weight:900;letter-spacing:1px;color:var(--gold);text-shadow:0 0 12px rgba(244,162,97,.8),0 2px 2px #000;opacity:0;white-space:nowrap}
+#damage-flash{position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 55%,rgba(239,71,111,.55) 100%);opacity:0}
+#killfeed{position:absolute;top:12px;right:12px;text-align:right;font-size:13px;line-height:1.7}
+#killfeed b{color:var(--gold)}
+#radiolog{position:absolute;left:12px;bottom:118px;font-size:13px;line-height:1.6;color:var(--cyan);text-shadow:0 1px 2px #000}
+#plant-prompt{position:absolute;left:50%;bottom:26%;transform:translateX(-50%);padding:6px 16px;font-weight:700;font-size:15px;color:var(--gold);display:none}
+#plant-progress{position:absolute;left:50%;bottom:22%;transform:translateX(-50%);width:0;height:10px;background:var(--gold);border-radius:5px}
+#bl{position:absolute;left:12px;bottom:12px;display:flex;gap:10px;align-items:flex-end}
+#bl .stat,.hd-preview .stat{padding:8px 14px;font-weight:800;min-width:76px;text-align:center}
+#bl .stat{font-size:20px}
+.hd-preview .stat{font-size:16px}
+#bl .stat small,.hd-preview .stat small{display:block;font-size:10px;letter-spacing:2px;color:var(--gold);font-weight:700}
+#health{color:#7dff9e}
+#armor{color:var(--cyan)}
+#ammo{color:var(--ivory)}
+#ammo-mag{font-size:26px}
+#cash{color:var(--gold)}
+#buy-mnu{position:fixed;inset:0;z-index:10;display:none;background:rgba(6,12,24,.88);overflow:auto;padding:4px}
+#buy-mnu>*{max-width:880px;margin-left:auto;margin-right:auto}
+.buy-item,.spec-card{cursor:pointer}
+#victory{position:fixed;inset:0;z-index:10;display:none;background:rgba(6,12,24,.88);overflow:auto;padding:12px;text-align:center}
+.victory-title{color:var(--gold);font-size:26px;letter-spacing:2px;margin:4px 0 0}
+#scoreboard{max-width:860px;margin:0 auto}
+.sb-table{width:100%;border-collapse:collapse;font-size:13px;margin:6px 0}
+.sb-table th{color:var(--gold);letter-spacing:1px;font-size:12px;padding:3px 4px;border-bottom:1px solid rgba(244,162,97,.5)}
+.sb-table td{padding:2px 4px;border-bottom:1px solid rgba(255,255,255,.08)}
+.sb-table tr.sb-mvp td{color:var(--gold);font-weight:800}
+.sb-tm{color:var(--cyan);font-weight:800;letter-spacing:2px;font-size:13px;margin:6px 0 2px}
+.sb-mvp{color:var(--gold);font-weight:800;font-size:15px;margin:6px 0}
+.sb-astral{font-size:13px;color:var(--ivory)}
+.sb-credits{color:var(--gold);font-weight:800}
+.sb-specs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:6px 0}
+.sb-spec{padding:4px 10px;border:1px solid rgba(244,162,97,.4);border-radius:6px;font-size:13px}
+.sb-spec.active{border-color:var(--gold);background:rgba(244,162,97,.18);font-weight:800}
+.sb-judge{font-size:12px;color:#9db4d0;margin:6px 0}
+button{cursor:pointer;font-family:inherit;font-weight:800;letter-spacing:2px;color:#0d1b2e;background:var(--gold);border:none;border-radius:6px;padding:12px 28px;font-size:16px}
+button:hover{filter:brightness(1.12)}
+#overlay-start{position:fixed;inset:0;z-index:20;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;background:linear-gradient(180deg,rgba(61,52,139,.25),rgba(13,27,46,.55));text-align:center}
+#overlay-start h1{margin:0;font-size:52px;letter-spacing:4px;color:var(--gold);text-shadow:0 0 24px rgba(244,162,97,.6),0 3px 3px #000}
+#overlay-start .rules{font-size:15px;color:var(--cyan);letter-spacing:1px;text-shadow:0 2px 3px #000;background:rgba(10,16,32,0.82);padding:6px 16px;border-radius:6px}
+#difficulty{display:flex;gap:10px}
+#difficulty button{padding:10px 22px;font-size:14px;background:rgba(13,27,46,.85);color:var(--ivory);border:2px solid rgba(244,162,97,.4)}
+#difficulty button.active{background:var(--gold);color:#0d1b2e;border-color:var(--gold)}
+.hd-preview{display:flex;gap:10px}
+#deploy-btn{font-size:24px;padding:20px 64px;letter-spacing:4px;box-shadow:0 0 30px rgba(244,162,97,.55)}
+</style>
+<script type="importmap">{"imports": {"three": "./vendor/three/three.module.min.js"}}</script>
+</head>
+<body>
+<div id="hd">
+<canvas id="minimap" width="160" height="120"></canvas>
+<div id="round-label" class="panel">ROUND 1</div>
+<div id="score" class="panel">SOLARIS 0 — 0 VOIDBORNE</div>
+<div id="timer" class="panel">1:40</div>
+<div id="alive" class="panel">5 v 5</div>
+<div id="crosshair"><span class="ch-t"></span><span class="ch-r"></span><span class="ch-b"></span><span class="ch-l"></span></div>
+<div id="hitmarker"></div>
+<div id="headshot-popup"></div>
+<div id="damage-flash"></div>
+<div id="killfeed"></div>
+<div id="radiolog"></div>
+<div id="plant-prompt" class="panel">HOLD E — PLANT THE SPIKE</div>
+<div id="plant-progress"></div>
+<div id="bl">
+<div id="health" class="stat panel"><small>HEALTH</small><span id="health-num">100</span></div>
+<div id="armor" class="stat panel"><small>ARMOUR</small><span id="armor-num">0</span></div>
+<div id="ammo" class="stat panel"><small>AMMO</small><span id="ammo-mag">12</span> / <span id="ammo-reserve">48</span></div>
+<div id="cash" class="stat panel"><small>CASH</small><span id="cash-num">$800</span></div>
+</div>
+</div>
+<div id="buy-mnu"></div>
+<div id="victory"></div>
+<div id="overlay-start">
+<h1>SOLARIS-9: ASTRAL BREACH</h1>
+<p class="rules">5v5 Tactical Plant/Defuse • First-to-8 • Q Polarity • R Active Venting</p>
+<div id="difficulty"><button data-diff="RECRUIT">RECRUIT</button><button data-diff="VETERAN" class="active">VETERAN</button><button data-diff="ELITE">ELITE</button></div>
+<div class="hd-preview">
+<div class="stat panel"><small>HEALTH</small>100</div>
+<div class="stat panel"><small>ARMOR</small>50</div>
+<div class="stat panel"><small>AMMO</small>30 / 90</div>
+<div class="stat panel"><small>CASH</small>$4,850</div>
+<div class="stat panel"><small>SCORE</small>4 — 2</div>
+</div>
+<button id="deploy-btn">[ DEPLOY ]</button>
+</div>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
