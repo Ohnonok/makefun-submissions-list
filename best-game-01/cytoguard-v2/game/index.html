@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- CYTOGUARD — GAME OVERVIEW: Leukocyte Prime guards the Organ Core through 15 waves of infection until immunity is restored. Systems: 3 Immune Classes, Dual Antigen Polarity Phagocytosis (Q), Platelet Fibrin Triangle Burst (Space), Metabolic Venting (R), Graze Fever Overdrive (E), Marrow Offering (F), Dynamic Homeostasis vs Febrile Crisis Physiology, Multi-Part Boss Miasma Prime. Craft: confocal/SEM procedural visuals, procedural Bio-WebAudio, 100% deterministic, zero network. -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CYTOGUARD: The Vital Surge | Leukocyte Prime: Protect the Organ Core, Purge 15 Waves | 5 Immune Classes, Polarity, Fibrin Triangle, Heat Venting, Fever Overdrive, Boss Miasma Prime, Procedural Audio</title>
+<style>
+  html, body { margin: 0; height: 100%; overflow: hidden; background: #060d18; }
+  #game { position: fixed; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; cursor: crosshair; }
+  /* Read aloud, never shown: the status line screen readers announce. */
+  #status { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+</style>
+</head>
+<body>
+<canvas id="game" aria-label="CYTOGUARD: The Vital Surge. Move with WASD, aim with the mouse, hold click to shoot. Protect the Organ Core for 15 waves."></canvas>
+<p id="status" role="status" aria-live="polite"></p>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
