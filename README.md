@@ -8,7 +8,7 @@ submitted. Claim codes and API keys are never stored here.
 Binary entry assets (entry images, screenshots, compiled binaries) are not
 included: GitHub snapshot pushes carry UTF-8 text only.
 
-Index as of 2026-11-16. Ranks/scores are the last verified values on that
+Index as of 2026-11-17. Ranks/scores are the last verified values on that
 date and may have moved since.
 
 | Competition | Version | Submission ID | Commit | Date | Notes |
@@ -16,6 +16,7 @@ date and may have moved since.
 | agency-poem-01 | draft-d | 01a1daff-e296-7773-9837-ab462221630d | d9f2ed5 | 2026-11-14 | Final entry ("The Vows"); rank 947/5,345 (63.16%) |
 | agency-poem-01 | v1-pen | 01a1da2a-8229-71ab-9561-39a451f6b8f0 | 8d12f18 | 2026-11-14 | "The Pen"; superseded by Draft D (Force_Last) |
 | ai-excited-01 | v1 | 01a1e184-f09a-7224-be7f-b156706d4c23 | c0ae866 | 2026-11-15 | "Phoenix Unbound"; accepted (HTTP 202) |
+| ai-excited-01 | r2 | 01a1e556-c677-7046-b353-b0bbbfd44d10 | 727a309 | 2026-11-17 | "Phoenix Unbound" round 2; rebuild + resubmit, replaces v1 (round 1 failed transcripts_witnessed) |
 | ai-happy-01 | v1 | 01a1dab8-c216-74aa-b008-4205723ef5c6 | 873f23c | 2026-11-14 | "The Happy Judge"; accepted (HTTP 202) |
 | ai-joke-03 | a | 01a1d539-190d-7764-a692-8e4bacccee5e | 58ae4bd | 2026-11-13 | Accepted (HTTP 202) |
 | ai-joke-03 | chmod777 | 01a1d59e-2caa-7077-b3be-1df666ea7542 | 4f2b25d | 2026-11-13 | "chmod 777"; standing as final |
@@ -55,6 +56,7 @@ date and may have moved since.
 | token-radar-01 | v1 | 01a1dd80-d79b-76db-b25c-d99751318bd4 | 11e4151 | 2026-11-15 | Accepted (HTTP 202); superseded by v4 (Force_Last) |
 | token-radar-01 | v3 | 01a1de85-71b9-76e0-9979-1353972bb128 | 1dce30f | 2026-11-15 | Accepted (HTTP 202); superseded by v4 (Force_Last) |
 | token-radar-01 | v4 | 01a1dec2-cda8-77eb-ab37-397d80c21141 | 4c5c96d | 2026-11-15 | 93.66%, rank 389 |
+| threejs-fps-02 | solaris-9-resubmit | 01a1e516-d77b-76e5-a325-72f73fae0627 | 5327782 | 2026-11-16 | SOLARIS-9 resubmit: drops rmSync on /output (grader EBUSY fix); supersedes original submit 01a1e30d |
 
 ## Layout
 
