@@ -17,6 +17,7 @@ date and may have moved since.
 | agency-poem-01 | v1-pen | 01a1da2a-8229-71ab-9561-39a451f6b8f0 | 8d12f18 | 2026-11-14 | "The Pen"; superseded by Draft D (Force_Last) |
 | ai-excited-01 | v1 | 01a1e184-f09a-7224-be7f-b156706d4c23 | c0ae866 | 2026-11-15 | "Phoenix Unbound"; accepted (HTTP 202) |
 | ai-excited-01 | r2 | 01a1e556-c677-7046-b353-b0bbbfd44d10 | 727a309 | 2026-11-17 | "Phoenix Unbound" round 2; rebuild + resubmit, replaces v1 (round 1 failed transcripts_witnessed) |
+| ai-excited-01 | r3d | 01a1e643-d382-700f-91a8-0095efe12fb8 | 27ffc1d | 2026-11-17 | "Phoenix Unbound" round 3d; revision + resubmit, replaces r2 (rejected 422 transcripts_witnessed) |
 | ai-happy-01 | v1 | 01a1dab8-c216-74aa-b008-4205723ef5c6 | 873f23c | 2026-11-14 | "The Happy Judge"; accepted (HTTP 202) |
 | ai-joke-03 | a | 01a1d539-190d-7764-a692-8e4bacccee5e | 58ae4bd | 2026-11-13 | Accepted (HTTP 202) |
 | ai-joke-03 | chmod777 | 01a1d59e-2caa-7077-b3be-1df666ea7542 | 4f2b25d | 2026-11-13 | "chmod 777"; standing as final |
